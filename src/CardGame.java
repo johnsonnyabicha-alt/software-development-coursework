@@ -12,12 +12,12 @@ public class CardGame {
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
             Integer numberOfPlayers = playerCheck(reader1);
-            if (numberOfPlayers == null){
+            if (numberOfPlayers == null) {
                 return;
+            }
             List<Card> pack = packCheck(reader1, numberOfPlayers);
             if (pack == null){
                 return;
-            }
             }
         }
         catch(NumberFormatException e) {
@@ -41,7 +41,7 @@ public class CardGame {
             }
             try{
                 int intInput = Integer.parseInt(input.trim()); // trim removes any whitespaces.
-                expectedCardSize(intInput);
+                expectedPackSize(intInput);
                 return intInput;
             }
             catch (IllegalArgumentException e) {
@@ -50,20 +50,54 @@ public class CardGame {
         }
     }
     static List<Card> packCheck(BufferedReader reader1, int n) throws IOException{
-        while((loc = reader1.readLine()) != null) {
+        while(true) {
+            System.out.println("Please type the location of the pack file.")
+            String line  == reader1.readline(); 
+            if (line == null){
+                return null;
+            }
             try{
-
+                if(line.trim().isEmpty()){
+                    throw new IllegalArgumentException("A file path is required.");
+                }
+                return readPack(Path.of(line.trim()),n);
+            } catch (IOException | IllegalArgumentException e){
+                System.out.println("Invalid pack:" e.getMessage());
             }
         }
     } 
-    public static List<Card> readPack(Path reader1, int intInput){
-        int expected = expectedCardSize(intInput);
+    public static List<Card> readPack(Path path, int intInput) throws IOException{
+        int expected = expectedPackSize(intInput);
         List<Card> pack = new ArrayList<>();
+        try(BufferedReader reader = Files.newBufferedReader(path)){
+            String line;
+            int row = 0; 
+            while((line = reader.readLine()) != null){
+                row++;
+                if(row > expected){
+                    throw new IllegalArgumentException("Expected" + expected + ". Found more rows than expected. For example, if there are 2 players, the number of rows should be 8n.")
+                }
+                String value = line.trim();
+                if(!value.matches("[0-9]+")){
+                    throw new IllegalArgumentException("Row value must be a positive integer ");
+                } 
+                try{
+                    pack.add(new Card(Integer.parseInt(value))); /* if the value doesn't satisfy this if check-where the string must be a positive integer from 0-9, 
+                                                                that repeats as many times as possible. e.g "12345" wont throw an exception */ 
+                } catch (NumberFormatException e ){
+                    throw new IllegalArgumentException("Row" + row + "exceeds the java int range.");
+                }
+            }
+        }
+        if (pack.size() != expected){
+            throw new IllegalArgumentException("Number of rows should be" + expected + "but the number of rows received were" + pack.size());
+        }
+        return List.copyOf(pack) // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
     }
     public static void deal(){
 
     }
-    private static int expectedCardSize(int n){
+    private static int expectedPackSize(int n){
         if (n <= 0 || n > Integer.MAX_VALUE/ 8){ // prevents integer overflow and makes sure n > 0.
             throw new IllegalArgumentException("The pack provided is not valid.");
         }
