@@ -93,6 +93,21 @@ public class CardGame {
         }
         return List.copyOf(pack) // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
     }
+<<<<<<< HEAD
+=======
+    public static void deal(int n, List<Card> pack, Path outputDirectory){
+        if(pack.size() != expected){
+            throw new IllegalArgumentException("Incorrect Pack Size.");
+        }
+        List<List<Card>> hands = new ArrayList<>();
+        List<List<Card>> deckCards = new ArrayList<>();
+        for(i = 0; i < 4 * n; i++){
+            hands.get(i % n).add(pack(i));
+            deckCards.get(i % n).add(pack(4 * n + i));
+        }
+
+    }
+>>>>>>> fdf6cc6 (logic for cards being dealt to the hand and the deck v1)
     private static int expectedPackSize(int n){
         if (n <= 0 || n > Integer.MAX_VALUE/ 8){ // prevents integer overflow and makes sure n > 0.
             throw new IllegalArgumentException("The pack provided is not valid.");
