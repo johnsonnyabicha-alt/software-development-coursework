@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
-    private CardGame() { }
     public static void main(String[] args) throws IOException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
