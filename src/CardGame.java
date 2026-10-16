@@ -94,13 +94,22 @@ public class CardGame {
         }
         return List.copyOf(pack) // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
     }
-    public static void deal(){
-
-    }
     private static int expectedPackSize(int n){
         if (n <= 0 || n > Integer.MAX_VALUE/ 8){ // prevents integer overflow and makes sure n > 0.
             throw new IllegalArgumentException("The pack provided is not valid.");
         }
         return 8 * n;
+    }
+
+    public static void distribute(pack, n, hands, decks)
+    {
+        List<List<Card>> hands = new ArrayList<>(n);
+        List<List<Card>> decks = new ArrayList<>(n);
+        while (i=0; i < 4*n; i++;) {
+            hands.get(i % n).add(pack(i));
+        }
+        while (i = 4n; i < 8*n; i++;) {
+            decks.get(i%n).add(pack(i));
+        }
     }
 }
