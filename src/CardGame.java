@@ -102,7 +102,7 @@ public class CardGame {
 
     public static void distribute(pack, n, List<List<Card>> hands, List<List<Card>> decks)
     {
-        for (i = 0; i < n; i+=1;)
+        for (i = 0; i < n; i++;)
         {
             hands.add(new ArrayList<>());
             decks.add(new ArrayList<>());
@@ -119,6 +119,17 @@ public class CardGame {
 
     public static void play(List<Card> pack, int n, hands, decks)
     {
+
         List<Thread> threads = new ArrayList<>();
+        for (i = 0; i < n; i++;)
+        {
+            playernum = i+1
+            threads.add(new Thread(playernum))
+        }
+        for (Thread thread: threads)
+        {
+            thread.start()
+        }
+
     }
 }
