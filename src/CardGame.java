@@ -134,6 +134,13 @@ public class CardGame {
         {
             thread.join()
         }
+        for (hand in hands)
+        {
+            if (winCheck == true)
+            {
+                endGame;
+            }
+        }
 
     }
 }

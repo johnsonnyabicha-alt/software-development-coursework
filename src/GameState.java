@@ -15,6 +15,10 @@ public class GameState{
             return true;
         }
     }
+    public static void endGame()
+    {
+        
+    }
     public static int getDenomination(Card card)
     {
         value = card.getDenomination
