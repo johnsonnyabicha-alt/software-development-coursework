@@ -6,4 +6,8 @@ public class Card{
         }
         this.denomination = denomination;
     }
+    public static void giveDenomination
+    {
+        return this.denomination;
+    }
 }
