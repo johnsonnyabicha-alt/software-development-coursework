@@ -93,21 +93,6 @@ public class CardGame {
         }
         return List.copyOf(pack) // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
     }
-<<<<<<< HEAD
-=======
-    public static void deal(int n, List<Card> pack, Path outputDirectory){
-        if(pack.size() != expected){
-            throw new IllegalArgumentException("Incorrect Pack Size.");
-        }
-        List<List<Card>> hands = new ArrayList<>();
-        List<List<Card>> deckCards = new ArrayList<>();
-        for(i = 0; i < 4 * n; i++){
-            hands.get(i % n).add(pack(i));
-            deckCards.get(i % n).add(pack(4 * n + i));
-        }
-
-    }
->>>>>>> fdf6cc6 (logic for cards being dealt to the hand and the deck v1)
     private static int expectedPackSize(int n){
         if (n <= 0 || n > Integer.MAX_VALUE/ 8){ // prevents integer overflow and makes sure n > 0.
             throw new IllegalArgumentException("The pack provided is not valid.");
@@ -115,15 +100,25 @@ public class CardGame {
         return 8 * n;
     }
 
-    public static void distribute(pack, n, hands, decks)
+    public static void distribute(pack, n, List<List<Card>> hands, List<List<Card>> decks)
     {
-        List<List<Card>> hands = new ArrayList<>(n);
-        List<List<Card>> decks = new ArrayList<>(n);
+        for (i = 0; i < n; i+=1;)
+        {
+            hands.add(new ArrayList<>());
+            decks.add(new ArrayList<>());
+
+        }
+
         while (i=0; i < 4*n; i++;) {
             hands.get(i % n).add(pack(i));
         }
         while (i = 4n; i < 8*n; i++;) {
             decks.get(i%n).add(pack(i));
         }
+    }
+
+    public static void play(List<Card> pack, int n, hands, decks)
+    {
+        List<Thread> threads = new ArrayList<>();
     }
 }
