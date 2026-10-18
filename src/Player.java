@@ -5,11 +5,22 @@ public class Player implements Runnable{
     private final id;
     private hand;
     private cardDeck;
-    
+
 
     public void addCard(Card card)
     {
         hand.add(card);
+    }
+    public void discard()
+    {
+        for (i in hand)
+        {
+            if (i != id)
+        }
+    }
+    public ArrayList<> getDeckToDiscardTo()
+    {
+        
     }
 
     
