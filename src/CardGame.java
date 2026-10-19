@@ -7,7 +7,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
-
+    private static boolean gameRunning = true;
+    private static int intialChecksRemaining;
+    public static int nextAllowedThread = 1
+    
     public static void main(String[] args) throws IOException, InterruptedException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
