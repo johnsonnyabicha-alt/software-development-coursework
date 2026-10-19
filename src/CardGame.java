@@ -133,7 +133,7 @@ public class CardGame {
         for (i = 0; i < n; i++)
         {
             playernum = i + 1;
-            Player player = new Player(playernum);
+            Player player = new Player(playernum, hands, decks);
             threads.add(new Thread(player));
         }
         for (Thread thread: threads)
