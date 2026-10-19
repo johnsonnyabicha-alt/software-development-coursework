@@ -18,10 +18,7 @@ public class Player implements Runnable{
             if (i != id)
         }
     }
-    public ArrayList<> getDeckToDiscardTo()
-    {
-        
-    }
+
 
     
 }
