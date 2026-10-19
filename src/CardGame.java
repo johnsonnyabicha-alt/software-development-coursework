@@ -7,7 +7,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
-
+    
+    List<List<Integer>> globalhands = new ArrayList<>();
+    List<List<Integer>> globaldecks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
@@ -20,8 +22,8 @@ public class CardGame {
             if (pack == null){
                 return;
             }
-            List<List<Card>> hands = new ArrayList<>();
-            List<List<Card>> decks = new ArrayList<>();
+            List<List<Integer>> hands = new ArrayList<>();
+            List<List<Integer>> decks = new ArrayList<>();
             distribute(pack, numberOfPlayers, hands,decks);
             play(pack, numberOfPlayers,hands, decks);
         }
@@ -70,9 +72,9 @@ public class CardGame {
             }
         }
     } 
-    public static List<Card> readPack(Path path, int intInput) throws IOException{
+    public static List<Integer> readPack(Path path, int intInput) throws IOException{
         int expected = expectedPackSize(intInput);
-        List<Card> pack = new ArrayList<>();
+        List<Integer> pack = new ArrayList<>();
         try(BufferedReader reader = Files.newBufferedReader(path)){
             String line;
             int row = 0; 
@@ -86,7 +88,7 @@ public class CardGame {
                     throw new IllegalArgumentException("Row value must be a positive integer ");
                 } 
                 try{
-                    pack.add(new Card(Integer.parseInt(value))); /* if the value doesn't satisfy this if check-where the string must be a positive integer from 0-9, 
+                    pack.add(Integer.parseInt(value)); /* if the value doesn't satisfy this if check-where the string must be a positive integer from 0-9, 
                                                                 that repeats as many times as possible. e.g "12345" wont throw an exception */ 
                 } catch (NumberFormatException e ){
                     throw new IllegalArgumentException("Row" + row + "exceeds the java int range.");
@@ -105,7 +107,7 @@ public class CardGame {
         return 8 * n;
     }
 
-    public static void distribute(List<Card> pack, int n, List<List<Card>> hands, List<List<Card>> decks)
+    public static void distribute(List<Integer> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks)
     {
         for (i = 0; i < n; i++)
         {
@@ -122,6 +124,8 @@ public class CardGame {
         {
             decks.get(i % n).add(pack.get(i));
         }
+
+
     }
 
 
@@ -152,8 +156,8 @@ public class CardGame {
         // // }
 
     }
-    public int nextAllowedThread = 0;
-    public static synchronized void takeTurn(int id)
+    public static int nextAllowedThread = 0;
+    public static synchronized void takeTurn(int id, List)
     {
         if (id == nextAllowedThread)
         {
