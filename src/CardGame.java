@@ -55,7 +55,7 @@ public class CardGame {
     }
     static List<Card> packCheck(BufferedReader reader1, int n) throws IOException{
         while(true) {
-            System.out.println("Please type the location of the pack file.")
+            System.out.println("Please type the location of the pack file.");
             String line  = reader1.readLine(); 
             if (line == null){
                 return null;
@@ -107,31 +107,33 @@ public class CardGame {
 
     public static void distribute(List<Card> pack, int n, List<List<Card>> hands, List<List<Card>> decks)
     {
-        for (i = 0; i < n; i++;)
+        for (i = 0; i < n; i++)
         {
             hands.add(new ArrayList<>());
             decks.add(new ArrayList<>());
 
         }
 
-        while (i = 0; i < 4 * n; i++) {
+        for (i = 0; i < 4 * n; i++) 
+        {
             hands.get(i % n).add(pack.get(i));
         }
-        while (i = 4 * n; i < 8 * n; i++) {
+        for (i = 4 * n; i < 8 * n; i++) 
+        {
             decks.get(i % n).add(pack.get(i));
         }
     }
 
 
 
-    public static void play(List<Card> pack, int n, hands, decks) throws InterruptedException 
+    public static void play(List<Card> pack, int n, List<Card> hands, List<Card> decks) throws InterruptedException 
     {
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++)
         {
             playernum = i + 1;
-            Player player = new Player(playernum, hand.get(i),....);
-            threads.add(new Thread(player))
+            Player player = new Player(playernum);
+            threads.add(new Thread(player));
         }
         for (Thread thread: threads)
         {
@@ -141,13 +143,13 @@ public class CardGame {
         {
             thread.join();
         }
-        for (hand : hands)
-        {
-            if (winCheck == true)
-            {
-                endGame;
-            }
-        }
+        // for (hand : hands)
+        // {
+        // //     if (winCheck == true)
+        // //     {
+        // //         endGame;
+        // //     }
+        // // }
 
     }
     public int nextAllowedThread = 0;
@@ -164,13 +166,13 @@ public class CardGame {
             decks.get(id);
             //discrad to id+1 mod n
 
-            for (i in hands.get(playerId))
+            for (int i : hands.get(playerId).size())
             {
                 if (hands.get(playerId).get(i) != playerId)
                 {
-                    decks.get((playerId + 1 % n).add(hands.get(playerId)(i));
+                    decks.get((playerId + 1 % n).add(hands.get(playerId).get(i)));
                     hands.get(playerId).remove(i);
-                    System.out.println("player " + playerId + " discards a " + hands.get(playerId)(i) + " to deck " + (playerId + 1 % n)); 
+                    System.out.println("player " + playerId + " discards a " + hands.get(playerId).get(i) + " to deck " + playerId + 1 % n); 
                     break;
                 }
             }

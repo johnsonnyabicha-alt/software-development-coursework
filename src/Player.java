@@ -3,28 +3,13 @@ import java.util.List;
 import java.util.ArrayDeque;
 public class Player implements Runnable{
     private final id;
-    private hand;
-    private cardDeck;
-
-
-    public void addCard(Card card)
-    {
-        hand.add(card);
-    }
-    public void discard()
-    {
-        for (i in hand)
-        {
-            if (i != id)
-        }
+    player(int id){
+        this.id = id;
     }
 
-
-    
+    @Override
+    public void run() 
+    {
+        CardGame.takeTurn(id);
+    }
 }
-    public void beginTurn(){
-
-    }
-    public void endTurn(){
-
-    }
