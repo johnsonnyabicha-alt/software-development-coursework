@@ -146,7 +146,7 @@ public class CardGame {
         }
     }
     public static synchronized void takeTurn(int id, List<List<Integer>> hands,
-        List<List<Integer>> decks){
+        List<List<Integer>> decks) throws InterruptedException {
         while (gameRunning && id != nextAllowedThread){
             CardGame.class.wait();
         }
@@ -157,8 +157,8 @@ public class CardGame {
         int playerId = id-1;
         int n = decks.size();
         int nextDeck = (playerId + 1) % n;
-        List<List<Integer>> hand = hands.get(playerId);
-        List<List<Integer>> drawDeck = decks.get(playerId); // adding to the deck
+        List<Integer> hand = hands.get(playerId);
+        List<Integer> drawDeck = decks.get(playerId); // adding to the deck
         //take card from id
         if (!drawDeck.isEmpty()){
             int drawn = drawDeck.remove(0);
@@ -175,7 +175,7 @@ public class CardGame {
                     break;
                 }
             }
-            if winCheck(hand){
+            if (winCheck(hand)){
                 declarWinner(id);
             }
             nextAllowedThread = (id % n) + 1;
@@ -216,9 +216,9 @@ public class CardGame {
 
         return true;
     }
-    public static synchronized void checkInitialHand(int d, List<Integer> hand) throws InterruptedException{
+    public static synchronized void checkInitialHand(int id, List<Integer> hand) throws InterruptedException{
         if (gameRunning && winCheck(hand)) {
-            declarWinner(id);
+            declareWinner(id);
         }
         
         initialChecksRemaining--;
