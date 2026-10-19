@@ -56,7 +56,7 @@ public class CardGame {
     static List<Card> packCheck(BufferedReader reader1, int n) throws IOException{
         while(true) {
             System.out.println("Please type the location of the pack file.")
-            String line  == reader1.readLine(); 
+            String line  = reader1.readLine(); 
             if (line == null){
                 return null;
             }
@@ -66,7 +66,7 @@ public class CardGame {
                 }
                 return readPack(Path.of(line.trim()),n);
             } catch (IOException | IllegalArgumentException e){
-                System.out.println("Invalid pack: " e.getMessage());
+                System.out.println("Invalid pack: " + e.getMessage());
             }
         }
     } 
