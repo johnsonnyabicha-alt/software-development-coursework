@@ -155,10 +155,18 @@ public class CardGame {
         decks.get(playerId).remove(0);
 
         decks.get(id)
+        //discrad to id+1 mod n
+
+        for (i in hands.get(playerId))
+        {
+            if (hands.get(playerId)(i) != playerId)
+            {
+                decks.get((playerId + 1 % n).add(hands.get(playerId)(i));
+                hands.get(playerId).remove(i);
+            }
+        }
 
 
-        
-        //discrad to id+1 mod 4
     }
 
 }
