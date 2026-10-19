@@ -56,7 +56,7 @@ public class CardGame {
     static List<Card> packCheck(BufferedReader reader1, int n) throws IOException{
         while(true) {
             System.out.println("Please type the location of the pack file.")
-            String line  == reader1.readline(); 
+            String line  == reader1.readLine(); 
             if (line == null){
                 return null;
             }
@@ -66,7 +66,7 @@ public class CardGame {
                 }
                 return readPack(Path.of(line.trim()),n);
             } catch (IOException | IllegalArgumentException e){
-                System.out.println("Invalid pack:" e.getMessage());
+                System.out.println("Invalid pack: " e.getMessage());
             }
         }
     } 
@@ -79,7 +79,7 @@ public class CardGame {
             while((line = reader.readLine()) != null){
                 row++;
                 if(row > expected){
-                    throw new IllegalArgumentException("Expected" + expected + ". Found more rows than expected. For example, if there are 2 players, the number of rows should be 8n.")
+                    throw new IllegalArgumentException("Expected" + expected + ". Found more rows than expected. For example, if there are 2 players, the number of rows should be 8n.");
                 }
                 String value = line.trim();
                 if(!value.matches("[0-9]+")){
@@ -96,7 +96,7 @@ public class CardGame {
         if (pack.size() != expected){
             throw new IllegalArgumentException("Number of rows should be" + expected + "but the number of rows received were" + pack.size());
         }
-        return List.copyOf(pack) // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
+        return List.copyOf(pack); // unmodified list -> we cannot add, delete, move any elements in the pack for the rest of the game.
     }
     private static int expectedPackSize(int n){
         if (n <= 0 || n > Integer.MAX_VALUE/ 8){ // prevents integer overflow and makes sure n > 0.
@@ -105,7 +105,7 @@ public class CardGame {
         return 8 * n;
     }
 
-    public static void distribute(pack, n, List<List<Card>> hands, List<List<Card>> decks)
+    public static void distribute(List<Card> pack, int n, List<List<Card>> hands, List<List<Card>> decks)
     {
         for (i = 0; i < n; i++;)
         {
@@ -114,11 +114,11 @@ public class CardGame {
 
         }
 
-        while (i=0; i < 4*n; i++;) {
-            hands.get(i % n).add(pack(i));
+        while (i=0; i < 4 * n; i++;) {
+            hands.get(i % n).add(pack.get(i));
         }
-        while (i = 4n; i < 8*n; i++;) {
-            decks.get(i%n).add(pack(i));
+        while (i = 4n; i < 8 * n; i++;) {
+            decks.get(i % n).add(pack.get(i));
         }
     }
 
