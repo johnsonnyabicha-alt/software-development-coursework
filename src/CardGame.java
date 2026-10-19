@@ -125,6 +125,8 @@ public class CardGame {
 
     public static void play(List<List<Integer>> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks) throws InterruptedException 
     {
+        gameRunning = true;
+        // initialChecksRemaning = n;
         nextAllowedThread =  1;
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++)
@@ -142,7 +144,6 @@ public class CardGame {
             thread.join();
         }
     }
-    public static int nextAllowedThread = 1;
     public static synchronized void takeTurn(int id, List<List<Integer>> hands,
         List<List<Integer>> decks){
         if (id != nextAllowedThread){
