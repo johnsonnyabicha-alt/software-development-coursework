@@ -99,18 +99,18 @@ public class CardGame {
 
     public static void distribute(List<Integer> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks)
     {
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             hands.add(new ArrayList<>());
             decks.add(new ArrayList<>());
 
         }
 
-        for (i = 0; i < 4 * n; i++) 
+        for (int i = 0; i < 4 * n; i++) 
         {
             hands.get(i % n).add(pack.get(i));
         }
-        for (i = 4 * n; i < 8 * n; i++) 
+        for (int i = 4 * n; i < 8 * n; i++) 
         {
             decks.get(i % n).add(pack.get(i));
         }
