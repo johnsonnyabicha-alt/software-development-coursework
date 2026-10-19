@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
+
+
     public static void main(String[] args) throws IOException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
@@ -117,9 +119,10 @@ public class CardGame {
         }
     }
 
+
+
     public static void play(List<Card> pack, int n, hands, decks)
     {
-
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++;)
         {
@@ -144,4 +147,18 @@ public class CardGame {
         }
 
     }
+    public static void takeTurn(int id)
+    {
+
+        //take card from id
+        hands.get(id).add(decks.get(id)(0))
+        decks.get(id).remove(0);
+
+        decks.get(id)
+
+
+        
+        //discrad to id+1 mod 4
+    }
+
 }
