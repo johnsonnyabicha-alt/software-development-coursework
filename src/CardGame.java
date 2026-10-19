@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
 
-    public static void main(String[] args) throws IOException{ 
+    public static void main(String[] args) throws IOException, InterruptedException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
             Integer numberOfPlayers = playerCheck(reader1);
@@ -129,6 +129,7 @@ public class CardGame {
 
     public static void play(List<Integer> pack, int n, List<Integer> hands, List<Integer> decks) throws InterruptedException 
     {
+        nextAllowedThread =  1;
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++)
         {
@@ -179,6 +180,21 @@ public class CardGame {
             }
             nextAllowedThread = nextAllowedThread + 1 % n;
         } 
+    public static synchronized boolean winCheck(List<Integer> hand) {
+        if (hand.size() != 4) {
+            return false;
+        }
+
+        int firstValue = hand.get(0);
+
+        for (int value : hand) {
+            if (value != firstValue) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
         
     }
