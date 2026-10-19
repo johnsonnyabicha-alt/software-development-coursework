@@ -20,6 +20,10 @@ public class CardGame {
             if (pack == null){
                 return;
             }
+            List<List<Card>> hands = new ArrayList<>();
+            List<List<Card>> decks = new ArrayList<>();
+            distribute(pack, numberOfPlayers, hands,decks);
+            play();
         }
         catch(NumberFormatException e) {
             System.out.println("Please type an positive integer, for the number of players in the game.");
