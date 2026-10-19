@@ -146,9 +146,10 @@ public class CardGame {
     }
     public static synchronized void takeTurn(int id, List<List<Integer>> hands,
         List<List<Integer>> decks){
-        if (id != nextAllowedThread){
-            return;
+        while (gameRunning && id != nextAllowedThread){
+            CardGame.class.wait();
         }
+        
         int playerId = id-1;
         int n = decks.size();
         //take card from id
@@ -185,6 +186,16 @@ public class CardGame {
         }
 
         return true;
+    }
+    public static synchronized boolean isRunning() {
+        return gameRunning;
+    }
+    public static synchronized void declareWinner(int id) {
+        if (gameRunning) {
+            gameRunning = false;
+            System.out.println("player " + id + " wins");
+            CardGame.class.notifyAll();
+        }
     }
 
 }
