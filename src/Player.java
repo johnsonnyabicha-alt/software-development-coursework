@@ -20,7 +20,7 @@ public class Player implements Runnable{
             while(CardGame.isRunning()){
                 CardGame.takeTurn(id,hands,decks);
             }
-            CardGame.takeTurn(id, hands, decks);
+            // CardGame.takeTurn(id, hands, decks);
         } catch (InterruptedException e){
             CardGame.stopGame();
         }
