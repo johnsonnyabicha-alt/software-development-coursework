@@ -27,13 +27,6 @@ public class CardGame {
         catch(NumberFormatException e) {
             System.out.println("Please type an positive integer, for the number of players in the game.");
         }
-        
-
-        System.out.println("Please type the location of a valid input pack: ");
-        String path = reader1.readLine();
-
-        packCheck(reader1,path);
-        playerCheck(reader1, players);
     }
     static Integer playerCheck(BufferedReader reader1) throws IOException{
         while(true){
