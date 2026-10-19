@@ -23,7 +23,7 @@ public class CardGame {
             List<List<Card>> hands = new ArrayList<>();
             List<List<Card>> decks = new ArrayList<>();
             distribute(pack, numberOfPlayers, hands,decks);
-            play();
+            play(pack, numberOfPlayers,hands, decks);
         }
         catch(NumberFormatException e) {
             System.out.println("Please type an positive integer, for the number of players in the game.");
