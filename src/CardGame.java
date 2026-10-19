@@ -176,7 +176,7 @@ public class CardGame {
                 }
             }
             if (winCheck(hand)){
-                declarWinner(id);
+                declareWinner(id);
             }
             nextAllowedThread = (id % n) + 1;
             CardGame.class.notifyAll();
