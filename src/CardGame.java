@@ -154,32 +154,33 @@ public class CardGame {
         // // }
 
     }
-    public static int nextAllowedThread = 0;
-    public static synchronized void takeTurn(int id, List)
-    {
-        if (id == nextAllowedThread)
+    public static int nextAllowedThread = 1;
+    public static synchronized void takeTurn(int id, List<List<Integer>> hands,
+        List<List<Integer>> decks){
+        if (id != nextAllowedThread){
+            return;
+        }
+        int playerId = id-1;
+        //take card from id
+        hands.get(playerId).add(decks.get(playerId).get(0));
+        System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
+        decks.get(playerId).remove(0);
+
+        decks.get(id);
+        //discrad to id+1 mod n
+
+        for (int i : hands.get(playerId).size())
         {
-            int playerId = id-1;
-            //take card from id
-            hands.get(playerId).add(decks.get(playerId).get(0));
-            System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
-            decks.get(playerId).remove(0);
-
-            decks.get(id);
-            //discrad to id+1 mod n
-
-            for (int i : hands.get(playerId).size())
+            if (hands.get(playerId).get(i) != playerId)
             {
-                if (hands.get(playerId).get(i) != playerId)
-                {
-                    decks.get((playerId + 1 % n).add(hands.get(playerId).get(i)));
-                    hands.get(playerId).remove(i);
-                    System.out.println("player " + playerId + " discards a " + hands.get(playerId).get(i) + " to deck " + playerId + 1 % n); 
-                    break;
-                }
+                decks.get((playerId + 1 % n).add(hands.get(playerId).get(i)));
+                hands.get(playerId).remove(i);
+                System.out.println("player " + playerId + " discards a " + hands.get(playerId).get(i) + " to deck " + playerId + 1 % n); 
+                break;
             }
-            nextAllowedThread = nextAllowedThread + 1 % n;
-        } 
+        }
+        nextAllowedThread = nextAllowedThread + 1 % n;
+    } 
     public static synchronized boolean winCheck(List<Integer> hand) {
         if (hand.size() != 4) {
             return false;
