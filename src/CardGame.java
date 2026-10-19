@@ -155,27 +155,27 @@ public class CardGame {
     {
         if (id == nextAllowedThread)
         {
-            int playerId = id-1
+            int playerId = id-1;
             //take card from id
-            hands.get(playerId).add(decks.get(playerId)(0))
-            System.out.println("player " + playerId + " draws a " + decks.get(playerId)(0) + " from deck " + playerId)
+            hands.get(playerId).add(decks.get(playerId).get(0));
+            System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
             decks.get(playerId).remove(0);
 
-            decks.get(id)
+            decks.get(id);
             //discrad to id+1 mod n
 
             for (i in hands.get(playerId))
             {
-                if (hands.get(playerId)(i) != playerId)
+                if (hands.get(playerId).get(i) != playerId)
                 {
                     decks.get((playerId + 1 % n).add(hands.get(playerId)(i));
                     hands.get(playerId).remove(i);
-                    System.out.println("player " + playerId + " discards a " + hands.get(playerId)(i) + " to deck " + (playerId + 1 % n)) 
+                    System.out.println("player " + playerId + " discards a " + hands.get(playerId)(i) + " to deck " + (playerId + 1 % n)); 
                     break;
                 }
             }
             nextAllowedThread = nextAllowedThread + 1 % n;
-        }
+        } 
 
         
     }
