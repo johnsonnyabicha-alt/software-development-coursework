@@ -120,13 +120,13 @@ public class CardGame {
 
 
 
-    public static void play(List<Integer> pack, int n, List<Integer> hands, List<Integer> decks) throws InterruptedException 
+    public static void play(List<List<Integer>> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks) throws InterruptedException 
     {
         nextAllowedThread =  1;
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++)
         {
-            playernum = i + 1;
+            int playernum = i + 1;
             Player player = new Player(playernum, hands, decks);
             threads.add(new Thread(player));
         }
@@ -138,14 +138,6 @@ public class CardGame {
         {
             thread.join();
         }
-        // for (hand : hands)
-        // {
-        // //     if (winCheck == true)
-        // //     {
-        // //         endGame;
-        // //     }
-        // // }
-
     }
     public static int nextAllowedThread = 1;
     public static synchronized void takeTurn(int id, List<List<Integer>> hands,
@@ -154,6 +146,7 @@ public class CardGame {
             return;
         }
         int playerId = id-1;
+        int n = decks.size();
         //take card from id
         hands.get(playerId).add(decks.get(playerId).get(0));
         System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
@@ -188,9 +181,6 @@ public class CardGame {
         }
 
         return true;
-    }
-
-        
     }
 
 }
