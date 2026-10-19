@@ -15,7 +15,7 @@ public class Player implements Runnable{
     @Override
     public void run() {
         try {
-            CardGame.checkInitialHand(id, hands.get(id - 1));
+            CardGame.checkInitialHand(id, hands.get(id - 1), decks);
             
             while(CardGame.isRunning()){
                 CardGame.takeTurn(id,hands,decks);

@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
 public class CardGame {
     private static boolean gameRunning = true;
     private static int initialChecksRemaining;
@@ -135,6 +136,12 @@ public class CardGame {
             int playernum = i + 1;
             Player player = new Player(playernum, hands, decks);
             threads.add(new Thread(player));
+            
+            try
+            {
+                String filename = ("player" + playernum + "_output.txt");
+                FileWriter myWriter = new FileWriter(filename);
+            }catch(IOException e){}
         }
         for (Thread thread: threads)
         {
@@ -163,20 +170,29 @@ public class CardGame {
         if (!drawDeck.isEmpty()){
             int drawn = drawDeck.remove(0);
             hand.add(drawn);
-            System.out.println("player " + id + " draws a " + drawn + " from deck " + id);
+            String drawAction = ("player " + id + " draws a " + drawn + " from deck " + id);
+            System.out.println(drawAction);
+            String discardAction = "";
+            
 
             for (int i = 0; i < hand.size(); i++) {
                 if (hand.get(i) != id) { // if our denomination is not the same as the player id remove it.
                     int discarded = hand.remove(i);
                     decks.get(nextDeck).add(discarded);
-
-                    System.out.println("player " + id + " discards a " + discarded + " to deck " + (nextDeck + 1));
+                    discardAction = ("player " + id + " discards a " + discarded + " to deck " + (nextDeck + 1));
+                    System.out.println(discardAction);
 
                     break;
                 }
             }
+            String filename = ("player" + id + "_output.txt");
+            try (FileWriter myWriter = new FileWriter(filename, true))
+            {
+                myWriter.write("\n" + drawAction);
+                myWriter.write("\n" + discardAction);
+            }catch(IOException e){System.out.println("Error appending");}
             if (winCheck(hand)){
-                declareWinner(id);
+                declareWinner(id, decks);
             }
             nextAllowedThread = (id % n) + 1;
             CardGame.class.notifyAll();
@@ -216,9 +232,9 @@ public class CardGame {
 
         return true;
     }
-    public static synchronized void checkInitialHand(int id, List<Integer> hand) throws InterruptedException{
+    public static synchronized void checkInitialHand(int id, List<Integer> hand, List<List<Integer>> decks) throws InterruptedException{
         if (gameRunning && winCheck(hand)) {
-            declareWinner(id);
+            declareWinner(id, decks);
         }
         
         initialChecksRemaining--;
@@ -234,8 +250,24 @@ public class CardGame {
         gameRunning = false;
         CardGame.class.notifyAll();
     }
-    public static synchronized void declareWinner(int id) {
+    public static synchronized void declareWinner(int id, List<List<Integer>> decks) {
         if (gameRunning) {
+            
+            int i = 1;
+            for (List<Integer> deck : decks)
+            {
+                try
+                {
+                    String filename = ("deck" + i + "_output.txt");
+                    String deckDetails = ("deck" + i + " contents: " + deck);
+                    FileWriter myWriter = new FileWriter(filename);
+                    myWriter.write(deckDetails);
+                    myWriter.close();
+                    i++;
+                } catch (IOException e){}
+            }
+
+
             gameRunning = false;
             System.out.println("player " + id + " wins");
             CardGame.class.notifyAll();
@@ -243,3 +275,5 @@ public class CardGame {
     }
 
 }
+// initialise method files 
+// takeTurn -> player n.txt ,
