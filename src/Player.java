@@ -15,10 +15,14 @@ public class Player implements Runnable{
     @Override
     public void run() 
     {
-        CardGame.checkInitialHand(id, hands.get(id - 1));
-        while(CardGame.isRunning()){
-            CardGame.takeTurn(id,hands,decks);
+        try{
+            CardGame.checkInitialHand(id, hands.get(id - 1));
+            while(CardGame.isRunning()){
+            C    ardGame.takeTurn(id,hands,decks);
+            }
+            CardGame.takeTurn(id, hands, decks);
+        } catch (InterruptedException e){
+            CardGame.stopGame();
         }
-        CardGame.takeTurn(id, hands, decks);
     }
 }
