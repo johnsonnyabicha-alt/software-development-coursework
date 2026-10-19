@@ -176,6 +176,8 @@ public class CardGame {
             if winCheck(hand){
                 declarWinner(id);
             }
+            nextAllowedThread = (id % n) + 1;
+            CardGame.class.notifyAll();
         }
         
         hands.get(playerId).add(decks.get(playerId).get(0));
