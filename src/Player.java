@@ -15,6 +15,6 @@ public class Player implements Runnable{
     @Override
     public void run() 
     {
-        CardGame.takeTurn(id);
+        CardGame.takeTurn(id, hands, decks);
     }
 }
