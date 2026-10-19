@@ -114,10 +114,10 @@ public class CardGame {
 
         }
 
-        while (i=0; i < 4 * n; i++;) {
+        while (i = 0; i < 4 * n; i++) {
             hands.get(i % n).add(pack.get(i));
         }
-        while (i = 4n; i < 8 * n; i++;) {
+        while (i = 4 * n; i < 8 * n; i++) {
             decks.get(i % n).add(pack.get(i));
         }
     }
