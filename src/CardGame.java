@@ -152,7 +152,32 @@ public class CardGame {
         
         int playerId = id-1;
         int n = decks.size();
+
+        List<List<Integer>> hand = hands.get(playerId);
+        List<List<Integer>> drawDeck = deck.get(playerId); // adding to the deck
         //take card from id
+        if (!drawDeck.isEmpty()){
+            int drawn = drawDeck.remove(0);
+            hand.add(drawn);
+            System.out.println("player " + id + " draws a " + drawn + " from deck " + id);
+
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(i) != id) {
+                    int discarded = hand.remove(i);
+                    decks.get(nextDeck).add(discarded);
+
+                    System.out.println(
+                            "player " + id + " discards a " + discarded
+                            + " to deck " + (nextDeck + 1));
+
+                    break;
+                }
+            }
+            if winCheck(hand){
+                declarWinner(id);
+            }
+        }
+        
         hands.get(playerId).add(decks.get(playerId).get(0));
         System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
         decks.get(playerId).remove(0);
@@ -189,6 +214,10 @@ public class CardGame {
     }
     public static synchronized boolean isRunning() {
         return gameRunning;
+    }
+    public static synchronized void stopGame(){
+        gameRunning = false;
+        CardGame.class.notifyAll()
     }
     public static synchronized void declareWinner(int id) {
         if (gameRunning) {
