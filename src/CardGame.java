@@ -7,9 +7,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 public class CardGame {
-    
-    List<List<Integer>> globalhands = new ArrayList<>();
-    List<List<Integer>> globaldecks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
@@ -130,7 +127,7 @@ public class CardGame {
 
 
 
-    public static void play(List<Card> pack, int n, List<Card> hands, List<Card> decks) throws InterruptedException 
+    public static void play(List<Integer> pack, int n, List<Integer> hands, List<Integer> decks) throws InterruptedException 
     {
         List<Thread> threads = new ArrayList<>();
         for (i = 0; i < n; i++)
