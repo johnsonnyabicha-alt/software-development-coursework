@@ -18,13 +18,13 @@ public class CardGame {
             if (numberOfPlayers == null) {
                 return;
             }
-            List<Card> pack = packCheck(reader1, numberOfPlayers);
+            List<Integer> pack = packCheck(reader1, numberOfPlayers);
             if (pack == null){
                 return;
             }
             List<List<Integer>> hands = new ArrayList<>();
             List<List<Integer>> decks = new ArrayList<>();
-            distribute(pack, numberOfPlayers, hands,decks);
+            distribute(pack, numberOfPlayers, hands, decks);
             play(pack, numberOfPlayers,hands, decks);
         }
         catch(NumberFormatException e) {
@@ -55,7 +55,7 @@ public class CardGame {
             }
         }
     }
-    static List<Card> packCheck(BufferedReader reader1, int n) throws IOException{
+    static List<Integer> packCheck(BufferedReader reader1, int n) throws IOException{
         while(true) {
             System.out.println("Please type the location of the pack file.");
             String line  = reader1.readLine(); 
