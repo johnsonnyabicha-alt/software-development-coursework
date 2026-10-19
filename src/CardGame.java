@@ -124,24 +124,24 @@ public class CardGame {
 
 
 
-    public static void play(List<Card> pack, int n, hands, decks)
+    public static void play(List<Card> pack, int n, hands, decks) throws InterruptedException 
     {
         List<Thread> threads = new ArrayList<>();
-        for (i = 0; i < n; i++;)
+        for (i = 0; i < n; i++)
         {
-            playernum = i+1
+            playernum = i + 1;
             Player player = new Player(playernum, hand.get(i),....);
             threads.add(new Thread(player))
         }
         for (Thread thread: threads)
         {
-            thread.start()
+            thread.start();
         }
         for (Thread thread: threads)
         {
-            thread.join()
+            thread.join();
         }
-        for (hand in hands)
+        for (hand : hands)
         {
             if (winCheck == true)
             {
