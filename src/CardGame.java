@@ -37,10 +37,9 @@ public class CardGame {
         playerCheck(reader1, players);
     }
     static Integer playerCheck(BufferedReader reader1) throws IOException{
-
-        System.out.println("Please type the number of players in the game : ");
-        String input = reader1.readLine();
         while(true){
+            System.out.println("Please type the number of players in the game : ");
+            String input = reader1.readLine();
             if (input == null){ // readline returns null, whenever no more input is available.
                 return null; // note: pressing enter on a empty line returns " " not null
             }
