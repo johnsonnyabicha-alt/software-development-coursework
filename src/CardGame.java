@@ -149,10 +149,10 @@ public class CardGame {
     }
     public static void takeTurn(int id)
     {
-
+        int playerId = id-1
         //take card from id
-        hands.get(id).add(decks.get(id)(0))
-        decks.get(id).remove(0);
+        hands.get(playerId).add(decks.get(playerId)(0))
+        decks.get(playerId).remove(0);
 
         decks.get(id)
 
