@@ -126,6 +126,8 @@ public class CardGame {
     public static void play(List<List<Integer>> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks) throws InterruptedException 
     {
         gameRunning = true;
+        initialChecksRemaining = n;
+        nextAllowedThread = 1;
         // initialChecksRemaning = n;
         nextAllowedThread =  1;
         List<Thread> threads = new ArrayList<>();
