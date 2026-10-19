@@ -9,7 +9,7 @@ import java.util.List;
 public class CardGame {
     private static boolean gameRunning = true;
     private static int initialChecksRemaining;
-    public static int nextAllowedThread = 1
+    public static int nextAllowedThread = 1;
     
     public static void main(String[] args) throws IOException, InterruptedException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
@@ -129,7 +129,6 @@ public class CardGame {
         initialChecksRemaining = n;
         nextAllowedThread = 1;
         // initialChecksRemaning = n;
-        nextAllowedThread =  1;
         List<Thread> threads = new ArrayList<>();
         for (int i = 0; i < n; i++)
         {
@@ -159,7 +158,7 @@ public class CardGame {
         int n = decks.size();
         int nextDeck = (playerId + 1) % n;
         List<List<Integer>> hand = hands.get(playerId);
-        List<List<Integer>> drawDeck = deck.get(playerId); // adding to the deck
+        List<List<Integer>> drawDeck = decks.get(playerId); // adding to the deck
         //take card from id
         if (!drawDeck.isEmpty()){
             int drawn = drawDeck.remove(0);
@@ -233,7 +232,7 @@ public class CardGame {
     }
     public static synchronized void stopGame(){
         gameRunning = false;
-        CardGame.class.notifyAll()
+        CardGame.class.notifyAll();
     }
     public static synchronized void declareWinner(int id) {
         if (gameRunning) {
