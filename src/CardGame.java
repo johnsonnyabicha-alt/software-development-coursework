@@ -163,6 +163,7 @@ public class CardGame {
             {
                 decks.get((playerId + 1 % n).add(hands.get(playerId)(i));
                 hands.get(playerId).remove(i);
+                break;
             }
         }
 
