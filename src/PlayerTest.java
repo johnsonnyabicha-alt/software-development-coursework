@@ -10,7 +10,8 @@ public class Player {
   @Test 
   void initialWinningHandStopsWithoutDrawing() throws InterruptedException {
     List<Integer> pack = List.of(7, 7, 7, 7, 1, 2, 3, 4);
-    List<List<Integer>> hands = List.of(cards()
+    List<List<Integer>> hands = new ArrayList<>();
+    List<List<Integer>> decks = new ArrayList<>();
 
     CardGame.distribute(pack,1,hands,decks);
     CardGame.play(pack, 1, hands, decks);
