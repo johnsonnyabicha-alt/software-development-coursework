@@ -11,5 +11,10 @@ public class CardGameTest{
 
         assertTrue(CardGame.winCheck(hand));
     }
+    @Test 
+    void winningHandMustContainExactlyFourCards() {
+        assertFalse(CardGame.winCheck(List.of(7, 7, 7)));
+        assertFalse(CardGame.winCheck(List.of(7, 7, 7, 7, 7)));
+    }
 }
 
