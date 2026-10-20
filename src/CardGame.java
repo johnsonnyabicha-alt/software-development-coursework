@@ -10,8 +10,7 @@ import java.io.FileWriter;
 public class CardGame {
     private static boolean gameRunning = true;
     private static int initialChecksRemaining;
-    public static int nextAllowedThread = 1;
-    
+    public static int nextAllowedThread = 1;   
     public static void main(String[] args) throws IOException, InterruptedException{ 
         BufferedReader reader1 = new BufferedReader( new InputStreamReader(System.in)); // FileReader only accepts .txt files
         try{
@@ -100,16 +99,13 @@ public class CardGame {
         }
         return 8 * n;
     }
-
     public static void distribute(List<Integer> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks)
     {
         for (int i = 0; i < n; i++)
         {
             hands.add(new ArrayList<>());
             decks.add(new ArrayList<>());
-
         }
-
         for (int i = 0; i < 4 * n; i++) 
         {
             hands.get(i % n).add(pack.get(i));
@@ -118,12 +114,7 @@ public class CardGame {
         {
             decks.get(i % n).add(pack.get(i));
         }
-        
-
     }
-
-
-
     public static void play(List<Integer> pack, int n, List<List<Integer>> hands, List<List<Integer>> decks) throws InterruptedException 
     {
         gameRunning = true;
@@ -135,8 +126,7 @@ public class CardGame {
         {
             int playernum = i + 1;
             Player player = new Player(playernum, hands, decks);
-            threads.add(new Thread(player));
-            
+            threads.add(new Thread(player));      
             try
             {
                 List<Integer> hand = hands.get(i);
@@ -147,7 +137,6 @@ public class CardGame {
                 myWriter.write(initialHand);
                 myWriter.close();
             }catch(IOException e){}
-
         }
         for (Thread thread: threads)
         {
@@ -163,7 +152,6 @@ public class CardGame {
         while (gameRunning && id != nextAllowedThread){
             CardGame.class.wait();
         }
-
         if (!gameRunning) {
             return;
         }
@@ -179,15 +167,12 @@ public class CardGame {
             String drawAction = ("player " + id + " draws a " + drawn + " from deck " + id);
             System.out.println(drawAction);
             String discardAction = "";
-            
-
             for (int i = 0; i < hand.size(); i++) {
                 if (hand.get(i) != id) { // if our denomination is not the same as the player id remove it.
                     int discarded = hand.remove(i);
                     decks.get(nextDeck).add(discarded);
                     discardAction = ("player " + id + " discards a " + discarded + " to deck " + (nextDeck + 1));
                     System.out.println(discardAction);
-
                     break;
                 }
             }
@@ -204,50 +189,26 @@ public class CardGame {
             }
             nextAllowedThread = (id % n) + 1;
             CardGame.class.notifyAll();
-        }
-        
-        // hands.get(playerId).add(decks.get(playerId).get(0));
-        // System.out.println("player " + playerId + " draws a " + decks.get(playerId).get(0) + " from deck " + playerId);
-        // decks.get(playerId).remove(0);
-
-        // decks.get(id);
-        // //discrad to id+1 mod n
-
-        // for (int i : hands.get(playerId).size())
-        // {
-        //     if (hands.get(playerId).get(i) != playerId)
-        //     {
-        //         decks.get((playerId + 1 % n).add(hands.get(playerId).get(i)));
-        //         hands.get(playerId).remove(i);
-        //         System.out.println("player " + playerId + " discards a " + hands.get(playerId).get(i) + " to deck " + playerId + 1 % n); 
-        //         break;
-        //     }
-        // }
-        // nextAllowedThread = nextAllowedThread + 1 % n;
+        }  
     } 
     public static synchronized boolean winCheck(List<Integer> hand) {
         if (hand.size() != 4) {
             return false;
         }
-
         int firstValue = hand.get(0);
-
         for (int value : hand) {
             if (value != firstValue) {
                 return false;
             }
         }
-
         return true;
     }
     public static synchronized void checkInitialHand(int id, List<Integer> hand, List<List<Integer>> decks) throws InterruptedException{
         if (gameRunning && winCheck(hand)) {
             declareWinner(id, decks);
-        }
-        
+        }      
         initialChecksRemaining--;
         CardGame.class.notifyAll();
-
         while (initialChecksRemaining > 0 && gameRunning )
             CardGame.class.wait();
     }
@@ -259,8 +220,7 @@ public class CardGame {
         CardGame.class.notifyAll();
     }
     public static synchronized void declareWinner(int id, List<List<Integer>> decks) {
-        if (gameRunning) {
-            
+        if (gameRunning) {    
             int i = 1;
             for (List<Integer> deck : decks)
             {
@@ -274,15 +234,9 @@ public class CardGame {
                     i++;
                 } catch (IOException e){}
             }
-            for 
-
-
             gameRunning = false;
             System.out.println("player " + id + " wins");
             CardGame.class.notifyAll();
         }
     }
-
 }
-// initialise method files 
-// takeTurn -> player n.txt ,
