@@ -118,7 +118,7 @@ public class CardGame {
         {
             decks.get(i % n).add(pack.get(i));
         }
-
+        
 
     }
 
@@ -139,9 +139,15 @@ public class CardGame {
             
             try
             {
+                List<Integer> hand = hands.get(i);
                 String filename = ("player" + playernum + "_output.txt");
-                FileWriter myWriter = new FileWriter(filename);
+                FileWriter myWriter = new FileWriter(filename, true);
+                //myWriter.write("player" + playernum + " initial hand is " + hand);
+                String initialHand = ("player" + playernum + " initial hand is " + hand);
+                myWriter.write(initialHand);
+                myWriter.close();
             }catch(IOException e){}
+
         }
         for (Thread thread: threads)
         {
@@ -186,10 +192,12 @@ public class CardGame {
                 }
             }
             String filename = ("player" + id + "_output.txt");
+            String currentHand = ("player" + id + " current hand is " + hand);
             try (FileWriter myWriter = new FileWriter(filename, true))
             {
                 myWriter.write("\n" + drawAction);
                 myWriter.write("\n" + discardAction);
+                myWriter.write("\n" + currentHand);
             }catch(IOException e){System.out.println("Error appending");}
             if (winCheck(hand)){
                 declareWinner(id, decks);
@@ -266,6 +274,7 @@ public class CardGame {
                     i++;
                 } catch (IOException e){}
             }
+            for 
 
 
             gameRunning = false;
