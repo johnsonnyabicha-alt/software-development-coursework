@@ -1,18 +1,22 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
-  private final List<Thread> threads = new ArrayList<>();
   
   @Test 
   void initialWinningHandStopsWithoutDrawing() throws InterruptedException {
-
+    List<Integer> pack = List.of(7, 7, 7, 7, 1, 2, 3, 4);
     List<List<Integer>> hands = List.of(cards()
 
-    Thread player = startPlayer(1, hands, decks);
-    assertFinished(player);
+    CardGame.distribute(pack,1,hands,decks);
+    CardGame.play(pack, 1, hands, decks);
     
-    assertEquals(List.of(1, 1, 1, 1), hands.get(0));
-    assertEquals(List.of(5, 6, 2, 3), decks.get(0));
     assertFalse(CardGame.isRunning());
+    assertEquals(List.of(7, 7, 7, 7), hands.get(0));
+    assertEquals(List.of(1, 2, 3, 4), decks.get(0));
+    
   }
