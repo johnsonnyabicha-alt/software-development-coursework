@@ -15,11 +15,14 @@ Instructions to run test suit:
 **Steps**
 
 source cited: [Clickable Text] https://docs.junit.org/5.10.3/user-guide/index.html#running-tests-console-launcher
+0. Open terminal and navigate to src
 
-1. Open a terminal in that folder and compile the code:
+1. Download JUnit once
+   `curl -fL -o junit-platform-console-standalone-1.10.3.jar https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.3/junit-platform-console-standalone-1.10.3.jar`
+3. Open a terminal in that folder and compile the code:
 `javac -cp ".:junit-platform-console-standalone-1.10.3.jar" CardGame.java Player.java CardGameTest.java PlayerTest.java`
 
-3. Run both test classes:
+4. Run both test classes:
 `java -jar junit-platform-console-standalone-1.10.3.jar execute --class-path . --select-class CardGameTest --select-class PlayerTest`
 
 
